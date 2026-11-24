@@ -182,6 +182,74 @@
       font-weight: 600;
     }
 
+    .calculator-section {
+      border-top: 1px solid var(--brass);
+    }
+
+    .calculator-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+      gap: 1rem;
+    }
+
+    .bill-box,
+    .split-box {
+      padding: 1.25rem;
+      border: 1px solid var(--brass);
+      border-radius: 8px;
+    }
+
+    .bill-box h3,
+    .split-box h3 {
+      margin: 0 0 1rem;
+      color: var(--green);
+      font-size: 1.5rem;
+    }
+
+    .bill-row {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) 90px 42px;
+      gap: 0.75rem;
+      align-items: end;
+      margin-bottom: 0.75rem;
+    }
+
+    .remove-item {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border: 1px solid var(--brass);
+      border-radius: 8px;
+      background: var(--cream);
+      color: var(--brown);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .bill-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .bill-total {
+      color: var(--green);
+      font-family: "Playfair Display", serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    .split-result {
+      min-height: 2.2em;
+      margin: 1rem 0 0;
+      color: var(--green);
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
     .about-section {
       border-top: 1px solid var(--brass);
     }
@@ -265,8 +333,18 @@
       }
 
       .menu-grid,
-      .order-form {
+      .order-form,
+      .calculator-layout {
         grid-template-columns: 1fr;
+      }
+
+      .bill-row {
+        grid-template-columns: minmax(0, 1fr) 82px 42px;
+      }
+
+      .bill-actions {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .order-form .button,
@@ -370,6 +448,29 @@
       </div>
     </section>
 
+    <section class="calculator-section" id="calculator" aria-labelledby="calculator-title">
+      <h2 id="calculator-title">Build your bill</h2>
+      <div class="calculator-layout">
+        <div class="bill-box">
+          <h3>Your order</h3>
+          <div id="bill-items"></div>
+          <div class="bill-actions">
+            <button class="button" id="add-item" type="button">Add item</button>
+            <span class="bill-total" id="bill-total" aria-live="polite">Rs 0</span>
+          </div>
+        </div>
+
+        <div class="split-box">
+          <h3>Split the bill</h3>
+          <div class="form-field">
+            <label for="people">Number of people</label>
+            <input id="people" type="number" min="1" step="1" value="1" inputmode="numeric">
+          </div>
+          <p class="split-result" id="split-result" aria-live="polite">Rs 0 each</p>
+        </div>
+      </div>
+    </section>
+
     <section class="about-section" id="about" aria-labelledby="about-title">
       <h2 id="about-title">Stories served with every cup</h2>
       <p>Pull up a chair in the heart of old Peshawar. We bring together fragrant kahwa, beloved Peshawari flavours and the easy company that makes a good meal last a little longer.</p>
@@ -423,6 +524,99 @@
     const phoneInput = document.querySelector("#phone");
 
     document.querySelector("#current-year").textContent = new Date().getFullYear();
+
+    const menuItems = [
+      { name: "Traditional Green Kahwa", price: 250 },
+      { name: "Saffron Kahwa", price: 350 },
+      { name: "Warm Noon Chai", price: 200 },
+      { name: "Chapli Kebab", price: 650 },
+      { name: "Namkeen Tikka", price: 850 },
+      { name: "Beef Pulao", price: 700 },
+      { name: "Sheer Khurma", price: 300 },
+      { name: "Firni", price: 250 },
+      { name: "Gulab Jamun", price: 250 }
+    ];
+
+    const billItems = document.querySelector("#bill-items");
+    const billTotal = document.querySelector("#bill-total");
+    const peopleInput = document.querySelector("#people");
+    const splitResult = document.querySelector("#split-result");
+
+    function calculateBill() {
+      let total = 0;
+
+      billItems.querySelectorAll(".bill-row").forEach((row) => {
+        const itemValue = row.querySelector(".bill-item").value;
+        const itemIndex = Number(itemValue);
+        const quantity = Math.max(0, Number(row.querySelector(".bill-quantity").value) || 0);
+
+        if (itemValue !== "" && Number.isInteger(itemIndex) && itemIndex >= 0) {
+          total += menuItems[itemIndex].price * quantity;
+        }
+      });
+
+      billTotal.textContent = `Rs ${total}`;
+      const people = Math.max(1, Math.floor(Number(peopleInput.value) || 1));
+      peopleInput.value = people;
+      splitResult.textContent = `Rs ${Math.ceil(total / people)} each`;
+    }
+
+    function addBillRow() {
+      const row = document.createElement("div");
+      row.className = "bill-row";
+
+      const itemField = document.createElement("div");
+      itemField.className = "form-field";
+
+      const itemLabel = document.createElement("label");
+      itemLabel.textContent = "Item";
+
+      const itemSelect = document.createElement("select");
+      itemSelect.className = "bill-item";
+      itemSelect.innerHTML = '<option value="">Select an item</option>' + menuItems.map((item, index) =>
+        `<option value="${index}">${item.name} - Rs ${item.price}</option>`
+      ).join("");
+
+      itemLabel.append(itemSelect);
+      itemField.append(itemLabel);
+
+      const quantityField = document.createElement("div");
+      quantityField.className = "form-field";
+
+      const quantityLabel = document.createElement("label");
+      quantityLabel.textContent = "Qty";
+
+      const quantityInput = document.createElement("input");
+      quantityInput.className = "bill-quantity";
+      quantityInput.type = "number";
+      quantityInput.min = "1";
+      quantityInput.step = "1";
+      quantityInput.value = "1";
+
+      quantityLabel.append(quantityInput);
+      quantityField.append(quantityLabel);
+
+      const removeButton = document.createElement("button");
+      removeButton.className = "remove-item";
+      removeButton.type = "button";
+      removeButton.setAttribute("aria-label", "Remove item");
+      removeButton.textContent = "×";
+
+      itemSelect.addEventListener("change", calculateBill);
+      quantityInput.addEventListener("input", calculateBill);
+      removeButton.addEventListener("click", () => {
+        row.remove();
+        calculateBill();
+      });
+
+      row.append(itemField, quantityField, removeButton);
+      billItems.append(row);
+      calculateBill();
+    }
+
+    document.querySelector("#add-item").addEventListener("click", addBillRow);
+    peopleInput.addEventListener("input", calculateBill);
+    addBillRow();
 
     orderForm.addEventListener("submit", (event) => {
       event.preventDefault();
