@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FBF5EC">
+  <title>About | Qissa Khwani Kahwa House</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --cream: #FBF5EC;
+      --green: #1F5F4A;
+      --brass: #C8963E;
+      --brown: #2B2118;
+      font-family: "Poppins", sans-serif;
+      color: var(--brown);
+      background: var(--cream);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--cream);
+      color: var(--brown);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--green);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Playfair Display", serif;
+      line-height: 1.2;
+    }
+
+    h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2.7rem, 7vw, 5rem);
+    }
+
+    h2 {
+      margin: 0 0 1.25rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .site-header,
+    .site-footer {
+      padding: 1.25rem max(1.25rem, calc((100% - 1120px) / 2));
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--brass);
+    }
+
+    .brand {
+      color: var(--green);
+      font-family: "Playfair Display", serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .tagline {
+      margin: 0.1rem 0 0;
+      font-size: 0.85rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    nav a {
+      font-weight: 500;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+    }
+
+    .page-hero {
+      padding: 5.5rem max(1.25rem, calc((100% - 1120px) / 2));
+      border-bottom: 1px solid var(--brass);
+    }
+
+    .page-hero p {
+      max-width: 670px;
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    main section {
+      padding: 4.5rem max(1.25rem, calc((100% - 1120px) / 2));
+    }
+
+    .story-section,
+    .visit-section {
+      border-bottom: 1px solid var(--brass);
+    }
+
+    .story-copy {
+      max-width: 760px;
+    }
+
+    .story-copy p {
+      margin: 0 0 1rem;
+    }
+
+    .story-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hours-grid,
+    .visit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .hours-card,
+    .visit-card {
+      padding: 1.25rem;
+      border: 1px solid var(--brass);
+      border-radius: 8px;
+    }
+
+    .hours-card h3,
+    .visit-card h3 {
+      margin: 0 0 0.75rem;
+      color: var(--green);
+      font-size: 1.5rem;
+    }
+
+    .hours-card p,
+    .visit-card p {
+      margin: 0.25rem 0;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.75rem 1.4rem;
+      border: 0;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--cream);
+      font: inherit;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--brass);
+      outline-offset: 3px;
+    }
+
+    .site-footer {
+      text-align: center;
+    }
+
+    .site-footer p {
+      margin: 0.25rem 0;
+    }
+
+    @media (max-width: 700px) {
+      .site-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        gap: 1rem;
+      }
+
+      .page-hero,
+      main section {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+      }
+
+      .hours-grid,
+      .visit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <a class="brand" href="index.html">Qissa Khwani Kahwa House</a>
+      <p class="tagline">Kahwa, chapli kebab and good stories in old Peshawar.</p>
+    </div>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero" aria-labelledby="page-title">
+      <h1 id="page-title">Our story</h1>
+      <p>A small place for generous cups, Peshawari flavours and stories worth carrying home.</p>
+    </section>
+
+    <section class="story-section" aria-labelledby="story-title">
+      <h2 id="story-title">Where every cup begins a conversation</h2>
+      <div class="story-copy">
+        <p>Qissa Khwani Kahwa House grew from the old bazaar's love of gathering. Here, neighbours, travellers and friends meet over kahwa, warm kebabs and the easy rhythm of Peshawar.</p>
+        <p>We serve familiar recipes with care: cardamom in the tea, spice in the kebab and something sweet at the end. Our welcome is simple. Come as you are, stay for a while and leave with a good story.</p>
+      </div>
+    </section>
+
+    <section class="hours-section" aria-labelledby="hours-title">
+      <h2 id="hours-title">Opening hours</h2>
+      <div class="hours-grid">
+        <article class="hours-card">
+          <h3>Every day</h3>
+          <p>Open from 4 pm to 1 am</p>
+          <p>There is always time for one more cup.</p>
+        </article>
+        <article class="hours-card">
+          <h3>At the bazaar</h3>
+          <p>Qissa Khwani Bazaar, Peshawar</p>
+          <p>Step inside from 4 pm onwards.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="visit-section" id="visit" aria-labelledby="visit-title">
+      <h2 id="visit-title">Visit us</h2>
+      <div class="visit-grid">
+        <article class="visit-card">
+          <h3>Find us</h3>
+          <p>Qissa Khwani Bazaar</p>
+          <p>Peshawar</p>
+        </article>
+        <article class="visit-card">
+          <h3>Plan your evening</h3>
+          <p>Open daily 4 pm to 1 am</p>
+          <p>Phone: 0300-1234567</p>
+          <a class="button" href="tel:03001234567">Call us</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Qissa Khwani Bazaar, Peshawar</p>
+    <p>Open daily 4 pm to 1 am</p>
+    <p>&copy; <span id="current-year"></span> Qissa Khwani Kahwa House</p>
+  </footer>
+
+  <script>
+    document.querySelector("#current-year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
