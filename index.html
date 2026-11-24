@@ -31,6 +31,7 @@
     body {
       margin: 0;
       min-width: 320px;
+      overflow-x: hidden;
       background: var(--cream);
       color: var(--brown);
       line-height: 1.6;
@@ -97,8 +98,25 @@
     }
 
     .hero {
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       padding: 7rem 1.25rem;
       text-align: center;
+    }
+
+    .today-special {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid var(--brass);
+      border-radius: 8px;
+      background: var(--brass);
+      color: var(--brown);
+      font-size: 0.85rem;
+      font-weight: 600;
     }
 
     .hero p {
@@ -118,6 +136,14 @@
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
+    }
+
+    .hero-order {
+      min-width: 220px;
+      padding: 1rem 2rem;
+      background: var(--brass);
+      color: var(--brown);
+      font-size: 1.1rem;
     }
 
     .button:focus-visible,
@@ -324,7 +350,14 @@
       }
 
       .hero {
-        padding: 5rem 1.25rem;
+        min-height: 520px;
+        padding: 4.5rem 1.25rem;
+      }
+
+      .hero-order {
+        max-width: 100%;
+        min-width: 0;
+        width: min(260px, 100%);
       }
 
       main section {
@@ -368,9 +401,10 @@
 
   <main>
     <section class="hero" id="home">
+      <span class="today-special">Today's special: Chapli Kebab</span>
       <h1>Qissa Khwani Kahwa House</h1>
       <p>Kahwa, chapli kebab and good stories in old Peshawar.</p>
-      <a class="button" href="#order">Order now</a>
+      <a class="button hero-order" href="#order">Order now</a>
     </section>
 
     <section class="menu-section" id="menu" aria-labelledby="menu-title">
